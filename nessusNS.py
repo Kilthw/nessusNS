@@ -48,7 +48,8 @@ for line in resolves:
 		nessus[l[0]]["hostfqdn"] = l[3]
 
 print("Writing Excel formatted nslookup data...")
-p = open("ping.bat", "w")
+if not opts.ping:
+	p = open("ping.bat", "w")
 with open(opts.outName, "w") as f:
 	for l in nessus:
 		if l.startswith("10.") or l.startswith("159."):
@@ -72,6 +73,7 @@ with open(opts.outName, "w") as f:
 							print("    ip:   " + results[1])
 							nessus[l]["hostfqdn"] = results[0]
 							f.write(results[0] + "\t" + results[1] + "\n")
+							p.write(results[0] + "\t" + results[1] + "\n")
 						else:
 							try:
 								f.write(l + "\t" + nessus[l]["hostip"] + "\n")
@@ -86,7 +88,8 @@ with open(opts.outName, "w") as f:
 		else:
 			f.write(l + "\t" + nessus[l]["hostip"] + "\n")
 f.close()
-p.close()
+if not opts.ping:
+	p.close()
 print("Writing JSON nslookup data...")
 with open("nslookup.json", 'w') as j:
 	json.dump(nessus, j)
