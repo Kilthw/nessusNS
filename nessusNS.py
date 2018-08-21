@@ -71,7 +71,7 @@ with open(opts.outName, "w") as f:
 							print("    fqdn: " + results[0])
 							print("    ip:   " + results[1])
 							nessus[l]["hostfqdn"] = results[0]
-							f.write(results[0] + "\t" + results[1])
+							f.write(results[0] + "\t" + results[1] + "\n")
 						else:
 							try:
 								f.write(l + "\t" + nessus[l]["hostip"] + "\n")
