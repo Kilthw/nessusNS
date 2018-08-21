@@ -11,7 +11,6 @@ Example: ./%(prog)s -d ./ -o output.txt -p
 
 """
 parser = argparse.ArgumentParser(usage=usage)
-parser.add_argument('-f', help='Initialize customer data store. Enter Full Path to the Parent Directory', dest='file', action='store', default=False)
 parser.add_argument('-d', help='Path to .nessus files. Default: \'./\'', dest='nessusDir', action='store', default="./")
 parser.add_argument('-o', help='Output name. Default: \'output.txt\'', dest='outName', action='store', default="output.txt")
 parser.add_argument('-p', help='Try \'ping -a\' to resolve hostname.', dest='ping', action='store_true', default=False)
