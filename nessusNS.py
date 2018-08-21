@@ -62,9 +62,9 @@ with open(opts.outName, "w") as f:
 						print("Checking ping -a results for " + l +"...")
 						try:
 							r = subprocess.check_output(["ping", "-a", l, "-n", "1"]).decode().lstrip()
-						except subprocess.CalledProcessError:
-							print("    [!] " + l + " ping attempt errored out...")
-							p.write("ping -a " + l + " -n 1 >> temp\r\n")
+						except subprocess.CalledProcessError as pingErr:
+							r = pingErr.output.decode().lstrip()
+							#p.write("ping -a " + l + " -n 1 >> temp\r\n")
 						if "["+l+"]" in r:
 							s = r.split(']',1)[0].replace('Pinging ','').replace('[','')
 							results = s.rsplit(' ',1)
