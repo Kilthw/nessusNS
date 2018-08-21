@@ -25,7 +25,7 @@ resolves = []
 print("Parsing Nessus Files for Host Reports...")
 for nessusFile in os.listdir(opts.nessusDir):
 	if ".nessus" in nessusFile:
-		with open(nessusFile) as f:
+		with open(os.path.join(opts.nessusDir,nessusFile)) as f:
 			currentHost = ""
 			for line in f:
 				if "<ReportHost name" in line:
@@ -49,7 +49,7 @@ for line in resolves:
 
 print("Writing Excel formatted nslookup data...")
 p = open("ping.bat", "w")
-with open(sys.argv[2], "w") as f:
+with open(opts.outName, "w") as f:
 	for l in nessus:
 		if l.startswith("10.") or l.startswith("159."):
 			try:
@@ -58,7 +58,7 @@ with open(sys.argv[2], "w") as f:
 				try:
 					f.write(nessus[l]["netbiosname"] + "\t" + l + "\n")
 				except KeyError:
-					if ping:
+					if opts.ping:
 						print("Checking ping -a results for " + l +"...")
 						try:
 							r = subprocess.check_output(["ping", "-a", l, "-n", "1"]).decode().lstrip()
