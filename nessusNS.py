@@ -12,7 +12,7 @@ Example: ./%(prog)s -d ./ -o output.txt -p
 """
 parser = argparse.ArgumentParser(usage=usage)
 parser.add_argument('-d', help='Path to .nessus files. Default: \'./\'', dest='nessusDir', action='store', default="./")
-parser.add_argument('-o', help='Output name. Default: \'output.tsv\'', dest='outName', action='store', default="output.txt")
+parser.add_argument('-o', help='Output name. Default: \'output.tsv\'', dest='outName', action='store', default="output.tsv")
 parser.add_argument('-p', help='Try \'ping -a\' to resolve hostname (Note: Only works in Windows).', dest='ping', action='store_true', default=False)
 if len(sys.argv)==1:
 	parser.print_help()
