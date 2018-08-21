@@ -78,6 +78,7 @@ with open(opts.outName, "w") as f:
 							except KeyError:
 								f.write(l + "\t" + l + "\n")
 					else:
+						p.write("ping -a " + l + " -n 1 >> temp\r\n")
 						try:
 							f.write(l + "\t" + nessus[l]["hostip"] + "\n")
 						except KeyError:
